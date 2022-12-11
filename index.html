@@ -132,7 +132,7 @@
             'icon-allow-overlap': true
         }
       });
-      map.setLayoutProperty('chiese', 'visibility', 'none');
+      map.setLayoutProperty('chiese', 'visibility', 'visible');
 
       map.on('click', 'chiese', function (e) {
           var coordinates = e.features[0].geometry.coordinates.slice();
@@ -159,7 +159,7 @@
       // Change it back to a pointer when it leaves.
       map.on('mouseleave', 'chiese', function () {
         map.getCanvas().style.cursor = '';
-      });  
+      });
     });
 
     button0.onclick = function () {
