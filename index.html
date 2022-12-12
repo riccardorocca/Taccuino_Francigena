@@ -162,7 +162,7 @@
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.688003, 45.054926]},'properties':{'icon':'square','title':"Istituto Gazzola<br>Scuola d'Arte/Pinacoteca"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.699660, 45.051344]},'properties':{'icon':'square','title':"Ente museo Palazzo Costa<br>Fondazione Horak"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.694634, 45.049318]},'properties':{'icon':'square','title':"Museo Capitolare della<br>Basilica di Sant'Antonino"}},
-            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.714005, 45.048321]},'properties':{'icon':'square','title':"Museo ornitologico"}},
+            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.714005, 45.048321]},'properties':{'icon':'square','title':"Museo Ornitologico"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.700456, 45.047508]},'properties':{'icon':'square','title':"Museo Scalabrini"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.677359, 45.040255]},'properties':{'icon':'square','title':"Museo della Civiltà Contadina<br>G. Raineri"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.702284, 45.052569]},'properties':{'icon':'square','title':"Museo della Stampa<br>M. Prati"}},
@@ -196,7 +196,7 @@
 
         new mapboxgl.Popup({closeButton: false})
         .setLngLat(coordinates)
-        .setHTML(title)
+        .setHTML("<center>"+title+"</center>")
         .addTo(map);
       });
 
