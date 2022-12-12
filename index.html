@@ -60,7 +60,7 @@
 
 <div class="menu">
   <button id="HtmlButton0" class="inactive">MAPPE</button>
-  <button id="HtmlButton3" class="active"><img src="https://riccardorocca.github.io/francigena-piacenza/legend.png"></button>
+  <button id="HtmlButton3" class="active" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend.png"></button>
   <button id="HtmlButton1" class="active" style="display: none;">Francigena a Piacenza</button>
   <button id="HtmlButton2" style="display: none;">Vista Satellitare</button>
 </div>
@@ -120,7 +120,7 @@
         map.addImage('square', image);
       });
 
-      map.addSource('chiese', {
+      map.addSource('punti interesse', {
         'type': 'geojson',
         'data': {
           'type': 'FeatureCollection',
@@ -176,17 +176,17 @@
       });
 
       map.addLayer({
-        'id': 'chiese',
+        'id': 'punti interesse',
         'type': 'symbol',
-        'source': 'chiese',
+        'source': 'punti interesse',
         'layout': {
             'icon-image': ['get','icon'],
             'icon-allow-overlap': true
         }
       });
-      map.setLayoutProperty('chiese', 'visibility', 'visible');
+      map.setLayoutProperty('punti interesse', 'visibility', 'visible');
 
-      map.on('click', 'chiese', function (e) {
+      map.on('click', 'punti interesse', function (e) {
           var coordinates = e.features[0].geometry.coordinates.slice();
           var title = e.features[0].properties.title;
 
@@ -204,12 +204,12 @@
       });
 
       // Change the cursor to a pointer when the mouse is over the places layer.
-      map.on('mouseenter', 'chiese', function () {
+      map.on('mouseenter', 'punti interesse', function () {
         map.getCanvas().style.cursor = 'pointer';
       });
 
       // Change it back to a pointer when it leaves.
-      map.on('mouseleave', 'chiese', function () {
+      map.on('mouseleave', 'punti interess', function () {
         map.getCanvas().style.cursor = '';
       });
     });
@@ -222,13 +222,23 @@
       }
     };
 
+    button3.className = 'active';
+    button3.onclick = function () {
+      if (button3.className === 'active') {
+        map.setLayoutProperty('punti interesse', 'visibility', 'none');
+        button3.className = 'inactive';
+      } else {
+        map.setLayoutProperty('punti interesse', 'visibility', 'visible');
+        button3.className = 'active';
+      }
+    };
+
     button1.className = 'active';
     button1.onclick = function () {
       if (button1.className === 'active') {
         map.setLayoutProperty('Via Francigena a Piacenza', 'visibility', 'none');
         button1.className = 'inactive';
       } else {
-        InactiveButtons();
         map.setLayoutProperty('Via Francigena a Piacenza', 'visibility', 'visible');
         button1.className = 'active';
       }
@@ -244,15 +254,11 @@
       }
     };
 
-    function InactiveButtons() {
-      map.setLayoutProperty('Via Francigena a Piacenza', 'visibility', 'none');
-      button1.className = 'inactive';
-    }
-
     function ShowMaps() {
       button0.className = 'active';
       button1.style.display = "block";
       button2.style.display = "block";
+      button3.style.display = "block";
       return;
     }
 
@@ -260,6 +266,7 @@
       button0.className = 'inactive';
       button1.style.display = "none";
       button2.style.display = "none";
+      button3.style.display = "none";
       return;
     }
 
