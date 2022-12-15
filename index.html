@@ -61,7 +61,8 @@
 <div class="menu">
   <button id="HtmlButton0" class="inactive">MAPPE</button>
   <button id="HtmlButton3" class="active" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend.png"></button>
-  <button id="HtmlButton1" class="active" style="display: none;">Francigena a Piacenza</button>
+  <button id="HtmlButton1" class="active" style="display: none;">Mappa Piacenza</button>
+  <button id="HtmlButton4" class="active" style="display: none;">Cammino</button>
   <button id="HtmlButton2" style="display: none;">Vista Satellitare</button>
 </div>
 
@@ -71,6 +72,7 @@
   var button1 = document.getElementById( 'HtmlButton1' );
   var button2 = document.getElementById( 'HtmlButton2' );
   var button3 = document.getElementById( 'HtmlButton3' );
+  var button4 = document.getElementById( 'HtmlButton4' );
   HideMaps();
 
 	mapboxgl.accessToken = 'pk.eyJ1Ijoicmljcm9jIiwiYSI6ImNpanZyajMxYTBhdmZ0dG01bmVsbG8ybzcifQ.RdmNKeWGLY_fqRmUrM9m4w';
@@ -245,6 +247,23 @@
       }
     };
 
+    button4.className = 'active';
+    button4.onclick = function () {
+      if (button4.className === 'active') {
+        map.setLayoutProperty('Cammino Francigena - Lodi', 'visibility', 'none');
+        map.setLayoutProperty('Cammino Francigena - Po', 'visibility', 'none');
+        map.setLayoutProperty('Cammino Francigena - Piacenza', 'visibility', 'none');
+        map.setLayoutProperty('Cammino Francigena - Parma', 'visibility', 'none');
+        button4.className = 'inactive';
+      } else {
+        map.setLayoutProperty('Cammino Francigena - Lodi', 'visibility', 'visible');
+        map.setLayoutProperty('Cammino Francigena - Po', 'visibility', 'visible');
+        map.setLayoutProperty('Cammino Francigena - Piacenza', 'visibility', 'visible');
+        map.setLayoutProperty('Cammino Francigena - Parma', 'visibility', 'visible');
+        button4.className = 'active';
+      }
+    };
+
     button2.onclick = function () {
       if (button2.className === 'active') {
         map.setLayoutProperty('Satellitare Google', 'visibility', 'none');
@@ -260,6 +279,7 @@
       button1.style.display = "block";
       button2.style.display = "block";
       button3.style.display = "block";
+      button4.style.display = "block";
       return;
     }
 
@@ -268,6 +288,7 @@
       button1.style.display = "none";
       button2.style.display = "none";
       button3.style.display = "none";
+      button4.style.display = "none";
       return;
     }
 
