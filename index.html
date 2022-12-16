@@ -80,7 +80,7 @@
         container: 'map',
         style: 'mapbox://styles/ricroc/clbj6cvwm005y14r3hzn4zbav',
         center: [9.692497,45.051890],
-        zoom: 14
+        zoom: 13
     });
 
     // Add geolocate control to the map.
@@ -250,12 +250,14 @@
     button4.className = 'active';
     button4.onclick = function () {
       if (button4.className === 'active') {
+        map.setLayoutProperty('Cammino Francigena - Luoghi', 'visibility', 'none');
         map.setLayoutProperty('Cammino Francigena - Lodi', 'visibility', 'none');
         map.setLayoutProperty('Cammino Francigena - Po', 'visibility', 'none');
         map.setLayoutProperty('Cammino Francigena - Piacenza', 'visibility', 'none');
         map.setLayoutProperty('Cammino Francigena - Parma', 'visibility', 'none');
         button4.className = 'inactive';
       } else {
+        map.setLayoutProperty('Cammino Francigena - Luoghi', 'visibility', 'visible');
         map.setLayoutProperty('Cammino Francigena - Lodi', 'visibility', 'visible');
         map.setLayoutProperty('Cammino Francigena - Po', 'visibility', 'visible');
         map.setLayoutProperty('Cammino Francigena - Piacenza', 'visibility', 'visible');
