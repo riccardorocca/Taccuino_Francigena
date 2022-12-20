@@ -69,6 +69,10 @@
 
 <div id="map"></div>
 <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const ospedali_visibility = urlParams.get('ospedali');
+  const punti_visibility = urlParams.get('punti');
+
   var button0 = document.getElementById( 'HtmlButton0' );
   var button1 = document.getElementById( 'HtmlButton1' );
   var button2 = document.getElementById( 'HtmlButton2' );
@@ -124,7 +128,7 @@
         map.addImage('square', image);
       });
 
-      map.addSource('punti interesse', {
+      map.addSource('punti', {
         'type': 'geojson',
         'data': {
           'type': 'FeatureCollection',
@@ -181,17 +185,22 @@
       });
 
       map.addLayer({
-        'id': 'punti interesse',
+        'id': 'punti',
         'type': 'symbol',
-        'source': 'punti interesse',
+        'source': 'punti',
         'layout': {
             'icon-image': ['get','icon'],
             'icon-allow-overlap': true
         }
       });
-      map.setLayoutProperty('punti interesse', 'visibility', 'visible');
 
-      map.on('click', 'punti interesse', function (e) {
+      if (punti_visibility === 'no') {
+        map.setLayoutProperty('punti', 'visibility', 'none');
+      } else {
+        map.setLayoutProperty('punti', 'visibility', 'visible');
+      }
+
+      map.on('click', 'punti', function (e) {
           var coordinates = e.features[0].geometry.coordinates.slice();
           var title = e.features[0].properties.title;
 
@@ -209,12 +218,12 @@
       });
 
       // Change the cursor to a pointer when the mouse is over the places layer.
-      map.on('mouseenter', 'punti interesse', function () {
+      map.on('mouseenter', 'punti', function () {
         map.getCanvas().style.cursor = 'pointer';
       });
 
       // Change it back to a pointer when it leaves.
-      map.on('mouseleave', 'punti interesse', function () {
+      map.on('mouseleave', 'punti', function () {
         map.getCanvas().style.cursor = '';
       });
 
@@ -252,7 +261,12 @@
             'icon-allow-overlap': true
         }
       });
-      map.setLayoutProperty('ospedali', 'visibility', 'visible');
+
+      if (ospedali_visibility === 'no') {
+        map.setLayoutProperty('ospedali', 'visibility', 'none');
+      } else {
+        map.setLayoutProperty('ospedali', 'visibility', 'visible');
+      }
 
       map.on('click', 'ospedali', function (e) {
           var coordinates = e.features[0].geometry.coordinates.slice();
@@ -291,18 +305,26 @@
       }
     };
 
-    button3.className = 'active';
+    if (punti_visibility === 'no') {
+      button3.className = 'inactive';
+    } else {
+      button3.className = 'active';
+    }
     button3.onclick = function () {
       if (button3.className === 'active') {
-        map.setLayoutProperty('punti interesse', 'visibility', 'none');
+        map.setLayoutProperty('punti', 'visibility', 'none');
         button3.className = 'inactive';
       } else {
-        map.setLayoutProperty('punti interesse', 'visibility', 'visible');
+        map.setLayoutProperty('punti', 'visibility', 'visible');
         button3.className = 'active';
       }
     };
 
-    button5.className = 'active';
+    if (ospedali_visibility === 'no') {
+      button5.className = 'inactive';
+    } else {
+      button5.className = 'active';
+    }
     button5.onclick = function () {
       if (button5.className === 'active') {
         map.setLayoutProperty('ospedali', 'visibility', 'none');
