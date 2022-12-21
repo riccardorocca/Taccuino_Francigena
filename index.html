@@ -335,10 +335,6 @@
         button5.className = 'inactive';
       } else {
         map.setLayoutProperty('ospedali', 'visibility', 'visible');
-        new mapboxgl.Popup({closeButton: false})
-        .setLngLat([9.705104, 45.047531])
-        .setHTML("<center>S. Salvatore</center>")
-        .addTo(map);
         button5.className = 'active';
       }
     };
