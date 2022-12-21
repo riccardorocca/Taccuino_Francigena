@@ -266,6 +266,10 @@
         map.setLayoutProperty('ospedali', 'visibility', 'none');
       } else {
         map.setLayoutProperty('ospedali', 'visibility', 'visible');
+        new mapboxgl.Popup({closeButton: false})
+        .setLngLat([9.705104, 45.047531])
+        .setHTML("<center>S. Salvatore</center>")
+        .addTo(map);
       }
 
       map.on('click', 'ospedali', function (e) {
