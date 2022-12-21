@@ -179,7 +179,7 @@
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.652204, 45.024367]},'properties':{'icon':'square','title':"Museo della Civiltà Contadina<br>G. Raineri"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.702284, 45.052569]},'properties':{'icon':'square','title':"Museo della Stampa<br>M. Prati"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.697306, 45.053162]},'properties':{'icon':'square','title':"Piccolo museo della Poesia<br>Incolmabili Fenditure"}},
-            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.698730, 45.049751]},'properties':{'icon':'square','title':"Kronos<br>Museo della Cattedrale"}},
+            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.698730, 45.049751]},'properties':{'icon':'square','title':"Kronos<br>Museo della Cattedrale"}}
           ]
         }
       });
@@ -247,7 +247,7 @@
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.697234, 45.048713]},'properties':{'icon':'ospedale','title':"S. Stefano"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.701992, 45.047806]},'properties':{'icon':'ospedale','title':"S. Anna"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.705104, 45.047531]},'properties':{'icon':'ospedale','title':"S. Salvatore"}},
-            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.701553, 45.050436]},'properties':{'icon':'ospedale','title':"S. Savino"}},
+            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.701553, 45.050436]},'properties':{'icon':'ospedale','title':"S. Savino"}}
           ]
         }
       });
@@ -335,6 +335,10 @@
         button5.className = 'inactive';
       } else {
         map.setLayoutProperty('ospedali', 'visibility', 'visible');
+        new mapboxgl.Popup({closeButton: false})
+        .setLngLat([9.705104, 45.047531])
+        .setHTML("<center>S. Salvatore</center>")
+        .addTo(map);
         button5.className = 'active';
       }
     };
