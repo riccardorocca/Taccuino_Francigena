@@ -60,6 +60,7 @@
 
 <div class="menu">
   <button id="HtmlButton0" class="inactive">MAPPE</button>
+  <button id="HtmlButton8">Informazioni</button>
   <button id="HtmlButton5" class="active" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend2.png"></button>
   <button id="HtmlButton3" class="active" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend1.png"></button>
   <button id="HtmlButton1" class="active" style="display: none;">Mappa Piacenza</button>
@@ -79,6 +80,7 @@
   var button3 = document.getElementById( 'HtmlButton3' );
   var button4 = document.getElementById( 'HtmlButton4' );
   var button5 = document.getElementById( 'HtmlButton5' );
+  var button8 = document.getElementById( 'HtmlButton8' );
   HideMaps();
 
 	mapboxgl.accessToken = 'pk.eyJ1Ijoicmljcm9jIiwiYSI6ImNpanZyajMxYTBhdmZ0dG01bmVsbG8ybzcifQ.RdmNKeWGLY_fqRmUrM9m4w';
@@ -379,6 +381,10 @@
       }
     };
 
+    button8.addEventListener( 'click', function() {
+      window.open("https://sites.google.com/view/riccardorocca/francigena-piacenza");
+    });
+
     function ShowMaps() {
       button0.className = 'active';
       button1.style.display = "block";
@@ -386,6 +392,7 @@
       button3.style.display = "block";
       button4.style.display = "block";
       button5.style.display = "block";
+      button8.style.display = "block";
       return;
     }
 
@@ -396,6 +403,7 @@
       button3.style.display = "none";
       button4.style.display = "none";
       button5.style.display = "none";
+      button8.style.display = "none";
       return;
     }
 
