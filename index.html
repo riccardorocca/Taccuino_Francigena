@@ -46,6 +46,15 @@
     #HtmlButton0.active       {background: #ff8080; color: #ffffff;}
     #HtmlButton0.active:hover {background: #ff6666; color: #ffffff;}
 
+    #HtmlButton8              {background: #70F070; color: #ffffff;}
+    #HtmlButton8:hover        {background: #30E030; color: #ffffff;}
+    #HtmlButton10             {background: #70F070; color: #ffffff;}
+    #HtmlButton10:hover       {background: #30E030; color: #ffffff;}
+    #HtmlButton11             {background: #70F070; color: #ffffff;}
+    #HtmlButton11:hover       {background: #30E030; color: #ffffff;}
+    #HtmlButton12             {background: #70F070; color: #ffffff;}
+    #HtmlButton12:hover       {background: #30E030; color: #ffffff;}
+
   </style>
 
 </head>
@@ -61,19 +70,22 @@
 <div class="menu">
   <button id="HtmlButton0" class="inactive">MAPPE</button>
   <button id="HtmlButton8">Informazioni</button>
-  <button id="HtmlButton5" class="active" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend2.png"></button>
-  <button id="HtmlButton3" class="active" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend1.png"></button>
-  <button id="HtmlButton1" class="active" style="display: none;">Mappa Città</button>
-  <button id="HtmlButton6" class="active" style="display: none;">Mappa Provincia</button>
-  <button id="HtmlButton4" class="active" style="display: none;">Cammino</button>
+  <button id="HtmlButton5" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend2.png"></button>
+  <button id="HtmlButton3" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend1.png"></button>
+  <button id="HtmlButton1" style="display: none;">Mappa Città</button>
+  <button id="HtmlButton6" style="display: none;">Mappa Provincia</button>
   <button id="HtmlButton2" style="display: none;">Vista Satellitare</button>
+  <button id="HtmlButton4" style="display: none;">Cammino</button>
+  <button id="HtmlButton10" style="display: none;">Info Orio Litta-Piacenza</button>
+  <button id="HtmlButton11" style="display: none;">Info Piacenza-Fiorenzuola</button>
+  <button id="HtmlButton12" style="display: none;">Info Fidenza-Fiorenzuola</button>
 </div>
 
 <div id="map"></div>
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const ospedali_visibility = urlParams.get('ospedali');
-  const punti_visibility = urlParams.get('punti');
+  const monumenti_visibility = urlParams.get('monumenti');
 
   var button0 = document.getElementById( 'HtmlButton0' );
   var button1 = document.getElementById( 'HtmlButton1' );
@@ -83,6 +95,9 @@
   var button5 = document.getElementById( 'HtmlButton5' );
   var button6 = document.getElementById( 'HtmlButton6' );
   var button8 = document.getElementById( 'HtmlButton8' );
+  var button10 = document.getElementById( 'HtmlButton10' );
+  var button11 = document.getElementById( 'HtmlButton11' );
+  var button12 = document.getElementById( 'HtmlButton12' );
   HideMaps();
 
 	mapboxgl.accessToken = 'pk.eyJ1Ijoicmljcm9jIiwiYSI6ImNpanZyajMxYTBhdmZ0dG01bmVsbG8ybzcifQ.RdmNKeWGLY_fqRmUrM9m4w';
@@ -132,7 +147,7 @@
         map.addImage('square', image);
       });
 
-      map.addSource('punti', {
+      map.addSource('monumenti', {
         'type': 'geojson',
         'data': {
           'type': 'FeatureCollection',
@@ -189,22 +204,22 @@
       });
 
       map.addLayer({
-        'id': 'punti',
+        'id': 'monumenti',
         'type': 'symbol',
-        'source': 'punti',
+        'source': 'monumenti',
         'layout': {
             'icon-image': ['get','icon'],
             'icon-allow-overlap': true
         }
       });
 
-      if (punti_visibility === 'no') {
-        map.setLayoutProperty('punti', 'visibility', 'none');
+      if (monumenti_visibility === 'no') {
+        map.setLayoutProperty('monumenti', 'visibility', 'none');
       } else {
-        map.setLayoutProperty('punti', 'visibility', 'visible');
+        map.setLayoutProperty('monumenti', 'visibility', 'visible');
       }
 
-      map.on('click', 'punti', function (e) {
+      map.on('click', 'monumenti', function (e) {
           var coordinates = e.features[0].geometry.coordinates.slice();
           var title = e.features[0].properties.title;
 
@@ -222,12 +237,12 @@
       });
 
       // Change the cursor to a pointer when the mouse is over the places layer.
-      map.on('mouseenter', 'punti', function () {
+      map.on('mouseenter', 'monumenti', function () {
         map.getCanvas().style.cursor = 'pointer';
       });
 
       // Change it back to a pointer when it leaves.
-      map.on('mouseleave', 'punti', function () {
+      map.on('mouseleave', 'monumenti', function () {
         map.getCanvas().style.cursor = '';
       });
 
@@ -269,11 +284,11 @@
       if (ospedali_visibility === 'no') {
         map.setLayoutProperty('ospedali', 'visibility', 'none');
       } else {
-        map.setLayoutProperty('ospedali', 'visibility', 'visible');
         new mapboxgl.Popup({closeButton: false})
         .setLngLat([9.705104, 45.047531])
         .setHTML("<center>S. Salvatore<br><a href='https://sites.google.com/view/riccardorocca/san-salvatore'>LINK</a></center>")
         .addTo(map);
+        map.setLayoutProperty('ospedali', 'visibility', 'visible');
       }
 
       map.on('click', 'ospedali', function (e) {
@@ -313,17 +328,17 @@
       }
     };
 
-    if (punti_visibility === 'no') {
+    if (monumenti_visibility === 'no') {
       button3.className = 'inactive';
     } else {
       button3.className = 'active';
     }
     button3.onclick = function () {
       if (button3.className === 'active') {
-        map.setLayoutProperty('punti', 'visibility', 'none');
+        map.setLayoutProperty('monumenti', 'visibility', 'none');
         button3.className = 'inactive';
       } else {
-        map.setLayoutProperty('punti', 'visibility', 'visible');
+        map.setLayoutProperty('monumenti', 'visibility', 'visible');
         button3.className = 'active';
       }
     };
@@ -354,7 +369,7 @@
       }
     };
 
-    button6.className = 'active';
+    button6.className = 'inactive';
     button6.onclick = function () {
       if (button6.className === 'active') {
         map.setLayoutProperty('Mappa Francigena Provincia', 'visibility', 'none');
@@ -394,6 +409,18 @@
       window.open("https://sites.google.com/view/riccardorocca/francigena-piacenza");
     });
 
+    button10.addEventListener( 'click', function() {
+      window.open("https://www.viefrancigene.org/it/resource/statictrack/tappa-16-da-orio-litta-piacenza/");
+    });
+
+    button11.addEventListener( 'click', function() {
+      window.open("https://www.viefrancigene.org/it/resource/statictrack/tappa-17-da-piacenza-fiorenzuola/");
+    });
+
+    button12.addEventListener( 'click', function() {
+      window.open("https://www.viefrancigene.org/it/resource/statictrack/tappa-16-da-orio-litta-piacenza/");
+    });
+
     function ShowMaps() {
       button0.className = 'active';
       button1.style.display = "block";
@@ -403,6 +430,9 @@
       button5.style.display = "block";
       button6.style.display = "block";
       button8.style.display = "block";
+      button10.style.display = "block";
+      button11.style.display = "block";
+      button12.style.display = "block";
       return;
     }
 
@@ -415,6 +445,9 @@
       button5.style.display = "none";
       button6.style.display = "none";
       button8.style.display = "none";
+      button10.style.display = "none";
+      button11.style.display = "none";
+      button12.style.display = "none";
       return;
     }
 
