@@ -63,7 +63,8 @@
   <button id="HtmlButton8">Informazioni</button>
   <button id="HtmlButton5" class="active" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend2.png"></button>
   <button id="HtmlButton3" class="active" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend1.png"></button>
-  <button id="HtmlButton1" class="active" style="display: none;">Mappa Piacenza</button>
+  <button id="HtmlButton1" class="active" style="display: none;">Mappa Città</button>
+  <button id="HtmlButton6" class="active" style="display: none;">Mappa Provincia</button>
   <button id="HtmlButton4" class="active" style="display: none;">Cammino</button>
   <button id="HtmlButton2" style="display: none;">Vista Satellitare</button>
 </div>
@@ -80,6 +81,7 @@
   var button3 = document.getElementById( 'HtmlButton3' );
   var button4 = document.getElementById( 'HtmlButton4' );
   var button5 = document.getElementById( 'HtmlButton5' );
+  var button6 = document.getElementById( 'HtmlButton6' );
   var button8 = document.getElementById( 'HtmlButton8' );
   HideMaps();
 
@@ -248,7 +250,7 @@
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.694788, 45.049553]},'properties':{'icon':'ospedale','title':"S. Antonino"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.697234, 45.048713]},'properties':{'icon':'ospedale','title':"S. Stefano"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.701992, 45.047806]},'properties':{'icon':'ospedale','title':"S. Anna"}},
-            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.705104, 45.047531]},'properties':{'icon':'ospedale','title':"S. Salvatore"}},
+            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.705104, 45.047531]},'properties':{'icon':'ospedale','title':"S. Salvatore<br><a href='https://sites.google.com/view/riccardorocca/san-salvatore'>LINK</a>"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.701553, 45.050436]},'properties':{'icon':'ospedale','title':"S. Savino"}}
           ]
         }
@@ -270,7 +272,7 @@
         map.setLayoutProperty('ospedali', 'visibility', 'visible');
         new mapboxgl.Popup({closeButton: false})
         .setLngLat([9.705104, 45.047531])
-        .setHTML("<center>S. Salvatore</center>")
+        .setHTML("<center>S. Salvatore<br><a href='https://sites.google.com/view/riccardorocca/san-salvatore'>LINK</a></center>")
         .addTo(map);
       }
 
@@ -344,29 +346,36 @@
     button1.className = 'active';
     button1.onclick = function () {
       if (button1.className === 'active') {
-        map.setLayoutProperty('Via Francigena a Piacenza', 'visibility', 'none');
+        map.setLayoutProperty('Mappa Francigena Citta', 'visibility', 'none');
         button1.className = 'inactive';
       } else {
-        map.setLayoutProperty('Via Francigena a Piacenza', 'visibility', 'visible');
+        map.setLayoutProperty('Mappa Francigena Citta', 'visibility', 'visible');
         button1.className = 'active';
+      }
+    };
+
+    button6.className = 'active';
+    button6.onclick = function () {
+      if (button6.className === 'active') {
+        map.setLayoutProperty('Mappa Francigena Provincia', 'visibility', 'none');
+        button6.className = 'inactive';
+      } else {
+        map.setLayoutProperty('Mappa Francigena Provincia', 'visibility', 'visible');
+        button6.className = 'active';
       }
     };
 
     button4.className = 'active';
     button4.onclick = function () {
       if (button4.className === 'active') {
-        map.setLayoutProperty('Cammino Francigena - Luoghi', 'visibility', 'none');
-        map.setLayoutProperty('Cammino Francigena - Lodi', 'visibility', 'none');
+        map.setLayoutProperty('Cammino Francigena', 'visibility', 'none');
         map.setLayoutProperty('Cammino Francigena - Po', 'visibility', 'none');
-        map.setLayoutProperty('Cammino Francigena - Piacenza', 'visibility', 'none');
-        map.setLayoutProperty('Cammino Francigena - Parma', 'visibility', 'none');
+        map.setLayoutProperty('Cammino Francigena - Luoghi', 'visibility', 'none');
         button4.className = 'inactive';
       } else {
-        map.setLayoutProperty('Cammino Francigena - Luoghi', 'visibility', 'visible');
-        map.setLayoutProperty('Cammino Francigena - Lodi', 'visibility', 'visible');
+        map.setLayoutProperty('Cammino Francigena', 'visibility', 'visible');
         map.setLayoutProperty('Cammino Francigena - Po', 'visibility', 'visible');
-        map.setLayoutProperty('Cammino Francigena - Piacenza', 'visibility', 'visible');
-        map.setLayoutProperty('Cammino Francigena - Parma', 'visibility', 'visible');
+        map.setLayoutProperty('Cammino Francigena - Luoghi', 'visibility', 'visible');
         button4.className = 'active';
       }
     };
@@ -392,6 +401,7 @@
       button3.style.display = "block";
       button4.style.display = "block";
       button5.style.display = "block";
+      button6.style.display = "block";
       button8.style.display = "block";
       return;
     }
@@ -403,6 +413,7 @@
       button3.style.display = "none";
       button4.style.display = "none";
       button5.style.display = "none";
+      button6.style.display = "none";
       button8.style.display = "none";
       return;
     }
