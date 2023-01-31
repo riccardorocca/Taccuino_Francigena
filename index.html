@@ -47,13 +47,13 @@
     #HtmlButton0.active:hover {background: #ff6666; color: #ffffff;}
 
     #HtmlButton8              {background: #70F070; color: #404040;}
-    #HtmlButton8:hover        {background: #30E030; color: #ffffff;}
+    #HtmlButton8:hover        {background: #30E030; color: #404040;}
     #HtmlButton10             {background: #70F070; color: #404040;}
-    #HtmlButton10:hover       {background: #30E030; color: #ffffff;}
+    #HtmlButton10:hover       {background: #30E030; color: #404040;}
     #HtmlButton11             {background: #70F070; color: #404040;}
-    #HtmlButton11:hover       {background: #30E030; color: #ffffff;}
+    #HtmlButton11:hover       {background: #30E030; color: #404040;}
     #HtmlButton12             {background: #70F070; color: #404040;}
-    #HtmlButton12:hover       {background: #30E030; color: #ffffff;}
+    #HtmlButton12:hover       {background: #30E030; color: #404040;}
 
   </style>
 
@@ -69,16 +69,16 @@
 
 <div class="menu">
   <button id="HtmlButton0" class="inactive">MAPPE</button>
-  <button id="HtmlButton8">Informazioni</button>
+  <button id="HtmlButton8">Info App</button>
+  <button id="HtmlButton10" style="display: none;">Info Orio Litta-Piacenza</button>
+  <button id="HtmlButton11" style="display: none;">Info Piacenza-Fiorenzuola</button>
+  <button id="HtmlButton12" style="display: none;">Info Fidenza-Fiorenzuola</button>
+  <button id="HtmlButton4" style="display: none;">Cammino Francigena</button>
   <button id="HtmlButton5" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend2.png"></button>
   <button id="HtmlButton3" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend1.png"></button>
   <button id="HtmlButton1" style="display: none;">Mappa Città</button>
   <button id="HtmlButton6" style="display: none;">Mappa Provincia</button>
   <button id="HtmlButton2" style="display: none;">Vista Satellitare</button>
-  <button id="HtmlButton4" style="display: none;">Cammino</button>
-  <button id="HtmlButton10" style="display: none;">Info Orio Litta-Piacenza</button>
-  <button id="HtmlButton11" style="display: none;">Info Piacenza-Fiorenzuola</button>
-  <button id="HtmlButton12" style="display: none;">Info Fidenza-Fiorenzuola</button>
 </div>
 
 <div id="map"></div>
@@ -133,7 +133,7 @@
           'source': 'google-source',
           'paint': {"raster-resampling": "linear"}
         },
-        'Provincia Piacenza'
+        'Mappa Francigena Provincia'
       );
       map.setLayoutProperty('Satellitare Google', 'visibility', 'none');
 
