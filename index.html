@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+<head>
   <meta name="author" content="Riccardo Rocca">
   <meta charset="utf-8">
-  <title>Francigena Piacenza</title>
-  <meta name="apple-mobile-web-app-title" content="Francigena Piacenza">
-  <link rel="apple-touch-icon" href="https://riccardorocca.github.io/francigena-piacenza/logo.png"/>
+  <title>Piacenza WalkMap</title>
+  <meta name="apple-mobile-web-app-title" content="PC WalkMap">
+  <link rel="apple-touch-icon" href="https://riccardorocca.github.io/Piacenza_WalkMap/icon.png"/>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
 
   <style id="compiled-css" type="text/css">
     body { margin: 0; padding: 0; }
@@ -46,15 +47,6 @@
     #HtmlButton0.active       {background: #ff8080; color: #ffffff;}
     #HtmlButton0.active:hover {background: #ff6666; color: #ffffff;}
 
-    #HtmlButton8              {background: #70F070; color: #404040;}
-    #HtmlButton8:hover        {background: #30E030; color: #404040;}
-    #HtmlButton10             {background: #70F070; color: #404040;}
-    #HtmlButton10:hover       {background: #30E030; color: #404040;}
-    #HtmlButton11             {background: #70F070; color: #404040;}
-    #HtmlButton11:hover       {background: #30E030; color: #404040;}
-    #HtmlButton12             {background: #70F070; color: #404040;}
-    #HtmlButton12:hover       {background: #30E030; color: #404040;}
-
   </style>
 
 </head>
@@ -70,22 +62,17 @@
 <div class="menu">
   <button id="HtmlButton0" class="inactive">MENÙ</button>
   <button id="HtmlButton8">Info App</button>
-  <button id="HtmlButton10" style="display: none;">Info Orio Litta-Piacenza</button>
-  <button id="HtmlButton11" style="display: none;">Info Piacenza-Fiorenzuola</button>
-  <button id="HtmlButton12" style="display: none;">Info Fidenza-Fiorenzuola</button>
   <button id="HtmlButton4" style="display: none;">Cammino Francigena</button>
   <button id="HtmlButton5" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend2.png"></button>
   <button id="HtmlButton3" style="display: none;"><img src="https://riccardorocca.github.io/francigena-piacenza/legend1.png"></button>
   <button id="HtmlButton1" style="display: none;">Mappa Città</button>
-  <button id="HtmlButton6" style="display: none;">Mappa Diocesi</button>
   <button id="HtmlButton2" style="display: none;">Vista Satellitare</button>
 </div>
 
 <div id="map"></div>
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const ospedali_visibility = urlParams.get('ospedali');
-  const monumenti_visibility = urlParams.get('monumenti');
+  const ospedali_visibility = 'yes';
+  const monumenti_visibility = 'no';
 
   var button0 = document.getElementById( 'HtmlButton0' );
   var button1 = document.getElementById( 'HtmlButton1' );
@@ -93,11 +80,7 @@
   var button3 = document.getElementById( 'HtmlButton3' );
   var button4 = document.getElementById( 'HtmlButton4' );
   var button5 = document.getElementById( 'HtmlButton5' );
-  var button6 = document.getElementById( 'HtmlButton6' );
   var button8 = document.getElementById( 'HtmlButton8' );
-  var button10 = document.getElementById( 'HtmlButton10' );
-  var button11 = document.getElementById( 'HtmlButton11' );
-  var button12 = document.getElementById( 'HtmlButton12' );
   HideMaps();
 
 	mapboxgl.accessToken = 'pk.eyJ1Ijoicmljcm9jIiwiYSI6ImNpanZyajMxYTBhdmZ0dG01bmVsbG8ybzcifQ.RdmNKeWGLY_fqRmUrM9m4w';
@@ -105,7 +88,7 @@
         container: 'map',
         style: 'mapbox://styles/ricroc/clbj6cvwm005y14r3hzn4zbav',
         center: [9.692497,45.051890],
-        zoom: 13
+        zoom: 14
     });
 
     // Add geolocate control to the map.
@@ -133,7 +116,7 @@
           'source': 'google-source',
           'paint': {"raster-resampling": "linear"}
         },
-        'Mappa Francigena Provincia'
+        'Mappa Francigena Citta'
       );
       map.setLayoutProperty('Satellitare Google', 'visibility', 'none');
 
@@ -369,17 +352,6 @@
       }
     };
 
-    button6.className = 'inactive';
-    button6.onclick = function () {
-      if (button6.className === 'active') {
-        map.setLayoutProperty('Mappa Francigena Provincia', 'visibility', 'none');
-        button6.className = 'inactive';
-      } else {
-        map.setLayoutProperty('Mappa Francigena Provincia', 'visibility', 'visible');
-        button6.className = 'active';
-      }
-    };
-
     button4.className = 'active';
     button4.onclick = function () {
       if (button4.className === 'active') {
@@ -409,18 +381,6 @@
       window.open("https://sites.google.com/view/riccardorocca/francigena-piacenza");
     });
 
-    button10.addEventListener( 'click', function() {
-      window.open("https://www.viefrancigene.org/it/resource/statictrack/tappa-16-da-orio-litta-piacenza/");
-    });
-
-    button11.addEventListener( 'click', function() {
-      window.open("https://www.viefrancigene.org/it/resource/statictrack/tappa-17-da-piacenza-fiorenzuola/");
-    });
-
-    button12.addEventListener( 'click', function() {
-      window.open("https://www.viefrancigene.org/it/resource/statictrack/tappa-16-da-orio-litta-piacenza/");
-    });
-
     function ShowMaps() {
       button0.className = 'active';
       button1.style.display = "block";
@@ -428,11 +388,7 @@
       button3.style.display = "block";
       button4.style.display = "block";
       button5.style.display = "block";
-      button6.style.display = "block";
       button8.style.display = "block";
-      button10.style.display = "block";
-      button11.style.display = "block";
-      button12.style.display = "block";
       return;
     }
 
@@ -443,16 +399,11 @@
       button3.style.display = "none";
       button4.style.display = "none";
       button5.style.display = "none";
-      button6.style.display = "none";
       button8.style.display = "none";
-      button10.style.display = "none";
-      button11.style.display = "none";
-      button12.style.display = "none";
       return;
     }
 
   </script>
 
-
-
-</body></html>
+</body>
+</html>
